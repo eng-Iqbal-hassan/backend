@@ -4,13 +4,20 @@
 // import express from "express";
 import dotenv from "dotenv"
 import connectDb from "./db/index.js";
+import { app } from "./app.js";
 // const app = express();
 
 dotenv.config({
     path: "./.env"
 })
 
-connectDb();
+connectDb()
+.then(
+    app.listen(process.env.PORT,()=>{
+        console.log(`Server is running at port ${process.env.PORT}`)
+    })
+)
+.catch((err)=>{console.log(`connectio to data base failed and the error is ${err}`)});
 
 // mongoose.connect('mongodb://127.0.0.1:27017/test'); 
 // In document, there is a direct line for database connection, but we will not directly connect our database, because whenever we connect our database then problem could arise so always use try catch block to handle the error, and database takes time to connectc so always use try catch block
