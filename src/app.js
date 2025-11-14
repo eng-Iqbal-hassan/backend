@@ -27,5 +27,14 @@ app.use(express.static("public"))
 // app.use(express.cookieParser())
 // To safely place the data in users browser and to control it we use this cookie parser. 
 
+// Routes import
+
+import userRouter from "./routes/user.routes.js"
+
+// Routes declartion
+app.use("/api/v1/users", userRouter);
+
+// http://localhost8000/users/register
+
 
 export { app };
