@@ -6,11 +6,11 @@ const app = express();
 
 app.use(cors({
    origin: process.env.CORS_ORIGIN,
-   Credential: true
+   credentials: true  // FIXED: "Credential" → "credentials"
 }));
 // First of all we will set our CORS that which frontend we will allow to listen(api calls will be made by our frontend only and not all frontend), Here, we will use app.use for our configuations, Inside it, there is cors and inside cors we have set our configuration, in which we set our origin and this origin is coming from our env and there we will set our frontend link, till now we have written the star, The other thing which we have set that credential is true.
 
-app.use(express.json({limit: "16kb"}));
+app.use(express.json({ limit: "16kb" }));
 
 // We have set that the response we will take will be json type(like the data coming from the form so and so on) and it is maximum of 16kb, body parsers were used before to handle this but in upgraded version of express, no need of this thing.
 
@@ -35,6 +35,5 @@ import userRouter from "./routes/user.routes.js"
 app.use("/api/v1/users", userRouter);
 
 // http://localhost:8000/api/v1/users/register
-
 
 export { app };
