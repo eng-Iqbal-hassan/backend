@@ -16,7 +16,9 @@ const uploadOnCloudinary = async (localFilePath) => {
         })
         // in upload method, we take the first thing which is file url and the second thing is the object in which we can set so many options which you can read on cloudinary documentation. One thing which we have taken over ther is resource type, we can take image, file or video individually but we have taken auto so that any of the file type will be stored over there.
         // the file is successfully uploaded
-        console.log("file is uploaded on cloudinary", response.url);
+        // console.log("file is uploaded on cloudinary", response.url);
+        // After the file is successfully uploaded, we will remove it from the local 
+        fs.unlinkSync(localFilePath)
         return response;
     }
     catch(err) {
