@@ -7,19 +7,21 @@ import { apiResponse } from "../utils/apiResponse.js";
 
 const generateAccessAndRefreshToken = async (userId) => {
     try {
-        const user = User.findById(userId);
+        const user = await User.findById(userId); 
+
         const accessToken = user.generateAccessToken();
         const refreshToken = user.generateRefreshToken();
-        user.refreshToken = refreshToken;
-        await user.save({validateBeforeSave: false})
 
-        return {accessToken, refreshToken};
-        
+        user.refreshToken = refreshToken;
+        await user.save({ validateBeforeSave: false });
+
+        return { accessToken, refreshToken };
+
+    } catch (err) {
+        throw new apiError(500, "Something went wrong while creating access and refresh token");
     }
-    catch(err) {
-        throw new apiError(500,"Something went wrong while creating access and refresh token")
-    }
-}
+};
+
 
 const registerUser = asyncHandler(async (req, res) => {
     // (1): get user detail from frontend
